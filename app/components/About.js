@@ -121,7 +121,7 @@ const About = () => {
               </p>
               <p className="text-gray-600 leading-relaxed">
                 From ancient temples to pristine beaches, misty mountains to wildlife sanctuaries, 
-                we'll help you discover the magic of this incredible island nation.
+                we&apos;ll help you discover the magic of this incredible island nation.
               </p>
             </div>
 

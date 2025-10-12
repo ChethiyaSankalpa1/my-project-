@@ -360,7 +360,7 @@ const SriLankaTourismExperience = () => {
           </div>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed flex-grow">
-            "{t.content}"
+            &quot;{t.content}&quot;
           </p>
         </div>
       ))}

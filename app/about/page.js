@@ -314,7 +314,7 @@ const About = () => {
 
         {/* Sri Lanka Images Grid */}
         <div ref={imageGridRef} className="mb-12 sm:mb-16 md:mb-20">
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-center">Experience Sri Lanka's Wonders</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-center">Experience Sri Lanka&apos;s Wonders</h3>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="image-card relative h-56 sm:h-64 rounded-lg overflow-hidden shadow-lg group">
               <img 
