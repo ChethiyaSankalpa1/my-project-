@@ -63,7 +63,7 @@ const About = () => {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            About <span className="text-blue-600">Dream Tour</span>
+            About <span className="text-blue-600">J Toors</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Your trusted partner for unforgettable Sri Lankan adventures since 2013
@@ -115,7 +115,7 @@ const About = () => {
                 Discover the Pearl of Indian Ocean
               </h3>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Dream Tour is your gateway to experiencing the authentic beauty of Sri Lanka. 
+                J Toors is your gateway to experiencing the authentic beauty of Sri Lanka. 
                 We create personalized journeys that showcase stunning landscapes, rich culture, 
                 and warm hospitality that make Sri Lanka truly special.
               </p>

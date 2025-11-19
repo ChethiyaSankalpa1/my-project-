@@ -11,24 +11,31 @@ const Header = () => {
   const headerRef = useRef(null);
   const logoRef = useRef(null);
   const navLinksRef = useRef([]);
+  const lastScrollYRef = useRef(0);
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const { y: currentScrollY } = useWindowScroll();
+  const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   // Scroll-based show/hide header
   useEffect(() => {
-    if (currentScrollY === 0) {
-      setIsNavVisible(true);
-    } else if (currentScrollY > lastScrollY) {
-      setIsNavVisible(false);
-    } else if (currentScrollY < lastScrollY) {
-      setIsNavVisible(true);
+    const scrollDiff = Math.abs(currentScrollY - lastScrollYRef.current);
+    
+    // Only update if scroll difference is significant (more than 10px)
+    if (scrollDiff < 10) {
+      return;
     }
 
-    setLastScrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
+    if (currentScrollY === 0) {
+      setIsNavVisible(prev => prev !== true ? true : prev);
+    } else if (currentScrollY > lastScrollYRef.current && currentScrollY > 80) {
+      setIsNavVisible(prev => prev !== false ? false : prev);
+    } else if (currentScrollY < lastScrollYRef.current) {
+      setIsNavVisible(prev => prev !== true ? true : prev);
+    }
+
+    lastScrollYRef.current = currentScrollY;
+  }, [currentScrollY]);
 
   // GSAP animation for header visibility
 useEffect(() => {
@@ -75,9 +82,7 @@ useEffect(() => {
     { name: "Home", path: "/", icon: Home },
     { name: "About Us", path: "/about", icon: Info },
     { name: "Tour Packages", path: "/packages", icon: Package },
-    { name: "Car Rent", path: "/cars", icon: Car },
-    { name: "Destinations", path: "/destinations", icon: MapPin },
-    { name: "Contact", path: "/contact", icon: Phone },
+    { name: "Contact Us", path: "/contact", icon: Phone },
   ];
 
   const handleNavClick = (index) => {
@@ -98,45 +103,58 @@ useEffect(() => {
       {/* Desktop / Tablet - EXACTLY YOUR ORIGINAL DESIGN */}
       <header
         ref={headerRef}
-        className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl px-8 py-5 rounded-full backdrop-blur-xl border border-white/10 shadow-lg bg-white/10"
+        className="hidden md:flex fixed top-0 left-0 right-0 z-50 px-8 py-4 backdrop-blur-xl border-b border-gray-200 shadow-sm bg-white/90"
       >
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
           {/* Logo */}
-          <div
-            ref={logoRef}
-            className="flex items-center gap-3 cursor-pointer"
-          >
-            <Link href="/">
-              <span className="text-black tracking-wide text-xl font-semibold">
-                Dream Tour
-              </span>
-            </Link>
-          </div>
+          <Link href="/" className="flex items-center gap-3 cursor-pointer">
+            <div ref={logoRef} className="flex items-center gap-3">
+              <img 
+                src="/logo.png" 
+                alt="J Toors Logo" 
+                className="h-20 w-auto"
+              />
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-gray-900">J Toors</span>
+                <span className="text-xs text-gray-600">Explore Sri Lanka</span>
+              </div>
+            </div>
+          </Link>
 
           {/* Nav Links */}
-          <nav className="flex items-center space-x-10">
+          <nav className="flex items-center space-x-8">
             {navItems.map((item, index) => (
               <Link key={item.name} href={item.path}>
                 <button
                   ref={(el) => (navLinksRef.current[index] = el)}
                   onClick={() => handleNavClick(index)}
-                  className="relative transition-colors duration-300 text-black/70 hover:text-cyan-400"
+                  className="relative transition-colors duration-300 text-gray-700 hover:text-orange-500"
                 >
                   <span className="text-sm font-medium">{item.name}</span>
                 </button>
               </Link>
             ))}
           </nav>
+
+          {/* Book Now Button */}
+          <Link href="/book">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-md font-medium transition-all duration-300 transform hover:scale-105 shadow-md">
+              BOOK NOW
+            </button>
+          </Link>
         </div>
       </header>
 
       {/* Mobile Header Bar */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/10 bg-white/10 shadow-lg">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/10 bg-white/90 shadow-lg">
         <div className="flex items-center justify-between px-4 py-4">
-          <Link href="/">
-            <span className="text-black tracking-wide text-lg font-semibold">
-              Dream Tour
-            </span>
+          <Link href="/" className="flex items-center gap-2">
+            <img 
+              src="/logo.png" 
+              alt="J Toors Logo" 
+              className="h-16 w-auto"
+            />
+            <span className="text-lg font-bold text-gray-900">J Toors</span>
           </Link>
           <button
             onClick={toggleMobileMenu}
@@ -188,7 +206,7 @@ useEffect(() => {
           {/* Mobile Menu Footer */}
           <div className="px-8 pb-8 pt-4 border-t border-black/10">
             <p className="text-center text-sm text-black/60">
-              © 2024 Dream Tour Sri Lanka
+              © 2024 J Toors Sri Lanka
             </p>
           </div>
         </div>

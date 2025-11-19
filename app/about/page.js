@@ -1,10 +1,20 @@
-"use client"
-import React, { useEffect, useRef } from 'react'
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { MapPin, Shield, Users, DollarSign, Award, Heart, Compass, Star } from 'lucide-react'
 
 const About = () => {
-  const heroTextRef = useRef(null)
-  const heroSubtextRef = useRef(null)
+  return (
+    <main className="pt-20">
+      <AboutContent />
+    </main>
+  );
+};
+
+const AboutContent = () => {
   const scrollIconRef = useRef(null)
   const discoverSectionRef = useRef(null)
   const imageGridRef = useRef(null)
@@ -13,13 +23,16 @@ const About = () => {
   const ctaSectionRef = useRef(null)
 
   useEffect(() => {
+    let script = null;
+    let scrollTriggerScript = null;
+
     // Load GSAP and ScrollTrigger from CDN
-    const script = document.createElement('script')
+    script = document.createElement('script')
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'
     script.async = true
     document.body.appendChild(script)
 
-    const scrollTriggerScript = document.createElement('script')
+    scrollTriggerScript = document.createElement('script')
     scrollTriggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'
     scrollTriggerScript.async = true
     document.body.appendChild(scrollTriggerScript)
@@ -30,27 +43,6 @@ const About = () => {
         const ScrollTrigger = window.ScrollTrigger
         
         gsap.registerPlugin(ScrollTrigger)
-
-        // Hero animations
-        gsap.fromTo(
-          heroTextRef.current,
-          { opacity: 0, y: -50 },
-          { opacity: 1, y: 0, duration: 1.2, delay: 0.3, ease: 'power3.out' }
-        )
-
-        gsap.fromTo(
-          heroSubtextRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.2, delay: 0.6, ease: 'power3.out' }
-        )
-
-        gsap.to(scrollIconRef.current, {
-          y: 10,
-          duration: 1.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'power1.inOut'
-        })
 
         // Discover Section
         if (discoverSectionRef.current) {
@@ -196,8 +188,12 @@ const About = () => {
     }
 
     return () => {
-      if (document.body.contains(script)) document.body.removeChild(script)
-      if (document.body.contains(scrollTriggerScript)) document.body.removeChild(scrollTriggerScript)
+      if (script && document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
+      if (scrollTriggerScript && document.body.contains(scrollTriggerScript)) {
+        document.body.removeChild(scrollTriggerScript)
+      }
     }
   }, [])
 
@@ -265,13 +261,11 @@ const About = () => {
         <div className="relative z-10 h-full flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
           <div className="max-w-3xl">
             <h1 
-              ref={heroTextRef}
               className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 sm:mb-4 leading-tight"
             >
               ABOUT US
             </h1>
             <p 
-              ref={heroSubtextRef}
               className="text-teal-300 text-base sm:text-lg md:text-xl font-light tracking-wide"
             >
               Your Ultimate Guide to Sri Lanka Tourism
@@ -285,12 +279,12 @@ const About = () => {
         {/* Discover Section */}
         <div ref={discoverSectionRef} className="py-12 sm:py-16 md:py-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-teal-700 mb-6 sm:mb-8">
-            Discover the Thrill of Adventure with Dream Tour
+            Discover the Thrill of Adventure with J Toors
           </h2>
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
             <div className="space-y-4">
               <p className="text-base sm:text-lg text-gray-700">
-                Welcome to Dream Tour, where your Sri Lankan adventure begins! We are passionate about showcasing the breathtaking beauty and rich cultural heritage of Sri Lanka, the Pearl of the Indian Ocean.
+                Welcome to J Toors, where your Sri Lankan adventure begins! We are passionate about showcasing the breathtaking beauty and rich cultural heritage of Sri Lanka, the Pearl of the Indian Ocean.
               </p>
               <p className="text-base sm:text-lg text-gray-700">
                 From the ancient cities of Anuradhapura and Polonnaruwa to the stunning beaches of Mirissa and Unawatuna, from the misty tea plantations of Nuwara Eliya to the wildlife of Yala National Park, we bring you the best of Sri Lanka.
@@ -373,7 +367,7 @@ const About = () => {
         <div ref={opportunitiesSectionRef} className="mb-12 sm:mb-16">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-3 sm:mb-4">Great Opportunities for Travelers</h3>
           <p className="text-center text-sm sm:text-base text-gray-600 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto px-4">
-            Every journey with Dream Tour opens doors to unforgettable experiences and creates memories that last a lifetime.
+            Every journey with J Toors opens doors to unforgettable experiences and creates memories that last a lifetime.
           </p>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             {opportunities.map((opportunity, index) => (
