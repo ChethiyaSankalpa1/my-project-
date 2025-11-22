@@ -305,7 +305,7 @@ const AllPackages = () => {
             loading="lazy"
             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
           />
-          <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm">
+          <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-lg ring-2 ring-white/50">
             {pkg.duration}
           </div>
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 sm:p-6">
@@ -316,6 +316,12 @@ const AllPackages = () => {
 
         {/* Content */}
         <div className="p-4 sm:p-6">
+          {/* Duration Info */}
+          <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-200">
+            <Clock className="w-4 h-4 text-orange-500" />
+            <span className="text-sm sm:text-base font-semibold text-gray-900">{pkg.duration}</span>
+          </div>
+          
           <p className="text-gray-600 text-sm sm:text-base mb-4">{pkg.summary}</p>
 
           {/* Highlights */}
