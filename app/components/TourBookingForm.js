@@ -327,6 +327,7 @@ const TourBookingForm = () => {
                 name="travelDate"
                 value={formData.travelDate}
                 onChange={handleChange}
+                min={new Date().toISOString().split('T')[0]}
                 required
                 className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
               />
