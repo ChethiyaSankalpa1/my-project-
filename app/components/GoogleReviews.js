@@ -11,7 +11,7 @@ const GoogleReviews = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "2024-10-15",
-      text: "Amazing experience with J Toors! Our driver was knowledgeable and friendly. The 14-day tour exceeded all expectations. Highly recommend!",
+      text: "Amazing experience with J Tours! Our driver was knowledgeable and friendly. The 14-day tour exceeded all expectations. Highly recommend!",
       avatar: "SJ"
     },
     {
@@ -27,7 +27,7 @@ const GoogleReviews = () => {
       name: "Emma Williams",
       rating: 5,
       date: "2024-09-10",
-      text: "Absolutely fantastic tour! The Ella train ride was breathtaking and the safari at Yala was incredible. J Toors made our honeymoon unforgettable.",
+      text: "Absolutely fantastic tour! The Ella train ride was breathtaking and the safari at Yala was incredible. J Tours made our honeymoon unforgettable.",
       avatar: "EW"
     },
     {

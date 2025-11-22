@@ -16,12 +16,12 @@ const Page = () => {
         <TourHero />
       </section>
 
-      {/* About J Toors */}
+      {/* About J Tours */}
       <section id="about" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              About <span className="text-orange-500">J Toors</span>
+              About <span className="text-orange-500">J Tours</span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               We offer a meticulously crafted portfolio of Sri Lanka tours, ranging from an express 5-day introduction to an immersive 21-day grand journey. 

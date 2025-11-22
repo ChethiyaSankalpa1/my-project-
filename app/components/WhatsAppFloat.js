@@ -9,8 +9,8 @@ const WhatsAppFloat = () => {
   
   // Your WhatsApp number (change this to your actual number)
   // Format: country code + number (no spaces, dashes, or plus sign in URL)
-  const whatsappNumber = "94771234567"; // Example: Sri Lanka number
-  const message = "Hi! I'm interested in booking a tour with J Toors.";
+  const whatsappNumber = "94703206081"; // +94 70 320 6081
+  const message = "Hi! I'm interested in booking a tour with J Tours.";
 
   useEffect(() => {
     // Show button after a short delay

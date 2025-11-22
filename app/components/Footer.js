@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Facebook, Instagram, Twitter, MapPin, Youtube, MessageCircle, Mail } from 'lucide-react';
 
 const Footer = () => {
@@ -7,10 +8,10 @@ const Footer = () => {
   const [locationError, setLocationError] = useState(null);
 
   useEffect(() => {
-    // Get and continuously watch user's current location
+    // Get user's current location ONCE (not continuously)
     if (navigator.geolocation) {
-      // Watch position to update when user moves
-      const watchId = navigator.geolocation.watchPosition(
+      // Get position only once on component mount
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           const newLocation = {
             lat: position.coords.latitude,
@@ -33,14 +34,9 @@ const Footer = () => {
         {
           enableHighAccuracy: true,
           timeout: 10000,
-          maximumAge: 30000
+          maximumAge: 300000 // Cache for 5 minutes
         }
       );
-
-      // Cleanup: stop watching when component unmounts
-      return () => {
-        navigator.geolocation.clearWatch(watchId);
-      };
     } else {
       setLocationError('Geolocation not supported');
       const defaultLocation = { lat: 6.9271, lng: 79.8612 };
@@ -70,7 +66,7 @@ const Footer = () => {
             
             {/* Logo Section */}
             <div className="flex flex-col items-center md:items-start">
-              <img src="/logo.png" alt="J Toors Logo" className="h-24 w-auto object-contain mb-6 drop-shadow-2xl" />
+              <img src="/logo.png" alt="J Tours Logo" className="h-24 w-auto object-contain mb-6 drop-shadow-2xl brightness-0 invert" />
               <div className="flex space-x-3">
                 <a href="#" className="w-10 h-10 rounded-lg bg-white/10 hover:bg-orange-500 flex items-center justify-center text-white transition-all duration-300">
                   <Facebook size={18} />
@@ -91,10 +87,10 @@ const Footer = () => {
             <div>
               <h3 className="text-white text-lg font-semibold mb-4">Pages</h3>
               <ul className="space-y-2">
-                <li><a href="/" className="text-white/80 hover:text-orange-400 transition-colors">Home</a></li>
-                <li><a href="/about" className="text-white/80 hover:text-orange-400 transition-colors">About Us</a></li>
-                <li><a href="/packages" className="text-white/80 hover:text-orange-400 transition-colors">Tour Packages</a></li>
-                <li><a href="/contact" className="text-white/80 hover:text-orange-400 transition-colors">Contact Us</a></li>
+                <li><Link href="/" className="text-white/80 hover:text-orange-400 transition-colors inline-block">Home</Link></li>
+                <li><Link href="/about" className="text-white/80 hover:text-orange-400 transition-colors inline-block">About Us</Link></li>
+                <li><Link href="/packages" className="text-white/80 hover:text-orange-400 transition-colors inline-block">Tour Packages</Link></li>
+                <li><Link href="/contact" className="text-white/80 hover:text-orange-400 transition-colors inline-block">Contact Us</Link></li>
               </ul>
             </div>
 
@@ -152,7 +148,7 @@ const Footer = () => {
           {/* Bottom Copyright */}
           <div className="border-t border-white/20 pt-6 text-center">
             <p className="text-white/60 text-sm">
-              © 2024 J Toors - All Rights Reserved | Powered by <span className="text-orange-400">J Toors</span> | Design by <span className="text-blue-400">Sahan Mewantha</span>
+              © 2024 J Tours - All Rights Reserved | Powered by <span className="text-orange-400">J Tours</span> | Design by <span className="text-blue-400">Sahan Mewantha</span>
             </p>
           </div>
         </div>

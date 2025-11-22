@@ -18,6 +18,8 @@ const TourBookingForm = () => {
   const [userCoords, setUserCoords] = useState(null);
   
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // Get user's GPS coordinates (for reference, but user selects from dropdown)
   useEffect(() => {
@@ -55,6 +57,8 @@ const TourBookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
     
     try {
       // Include user's GPS coordinates in booking data
@@ -75,17 +79,20 @@ const TourBookingForm = () => {
 
       const result = await response.json();
       
-      if (result.success) {
+      if (response.ok && result.success) {
         console.log('Booking submitted successfully');
         console.log('Emails sent:', result.emailsSent);
         if (result.emailError) {
           console.warn('Email error:', result.emailError);
         }
-        console.log('Admin email:', result.emails.admin);
-        console.log('Customer email:', result.emails.customer);
+        if (result.emails) {
+          console.log('Admin email:', result.emails.admin);
+          console.log('Customer email:', result.emails.customer);
+        }
         setSubmitted(true);
+        setLoading(false);
         
-        // Reset after 5 seconds
+        // Reset after 10 seconds (gives user time to read success message)
         setTimeout(() => {
           setSubmitted(false);
           setFormData({
@@ -99,36 +106,151 @@ const TourBookingForm = () => {
             message: '',
             pickupLocation: ''
           });
-        }, 5000);
+        }, 10000);
       } else {
-        alert('Failed to submit booking. Please try again.');
+        setLoading(false);
+        setError(result.message || 'Failed to submit booking. Please try again.');
+        // Auto-clear error after 8 seconds
+        setTimeout(() => setError(null), 8000);
       }
     } catch (error) {
       console.error('Error submitting booking:', error);
-      alert('An error occurred. Please try again.');
+      setLoading(false);
+      setError('Network error. Please check your connection and try again.');
+      // Auto-clear error after 8 seconds
+      setTimeout(() => setError(null), 8000);
     }
   };
 
   if (submitted) {
+    // Scroll to top to show success message
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
     return (
-      <div className="max-w-2xl mx-auto text-center py-12 px-4 animate-fade-in">
-        <CheckCircle className="w-12 h-12 sm:w-16 sm:h-16 text-green-500 mx-auto mb-4 animate-bounce" />
-        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Booking Request Submitted!</h3>
-        <p className="text-sm sm:text-base text-gray-600">
-          Thank you for choosing J Toors. We will contact you shortly to confirm your booking.
-        </p>
+      <div className="max-w-3xl mx-auto text-center py-8 px-4 sm:py-12 animate-fade-in">
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 sm:p-10 shadow-2xl border-2 border-green-200">
+          {/* Success Icon with Animation */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-200 rounded-full animate-ping opacity-20"></div>
+            </div>
+            <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-500 mx-auto relative animate-bounce" />
+          </div>
+          
+          {/* Success Message */}
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+            🎉 Booking Confirmed!
+          </h3>
+          <p className="text-base sm:text-lg text-gray-700 mb-6">
+            Thank you for choosing J Tours for your Sri Lanka adventure!
+          </p>
+          
+          {/* Email Confirmation Notice */}
+          <div className="bg-white rounded-xl p-4 sm:p-6 mb-6 shadow-md">
+            <div className="flex items-start gap-3 text-left">
+              <Mail className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">📧 Check Your Email</h4>
+                <p className="text-sm sm:text-base text-gray-600">
+                  We've sent a confirmation email with your booking details. 
+                  Please check your inbox (and spam folder just in case).
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Next Steps */}
+          <div className="bg-orange-50 rounded-xl p-4 sm:p-6 border border-orange-200">
+            <h4 className="font-semibold text-gray-900 mb-3 flex items-center justify-center gap-2">
+              <span className="text-orange-500">📞</span> What Happens Next?
+            </h4>
+            <ul className="text-sm sm:text-base text-gray-700 space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold">✓</span>
+                <span>Our team will review your request within 24 hours</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold">✓</span>
+                <span>We'll contact you to finalize the details</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 font-bold">✓</span>
+                <span>Get ready for an amazing Sri Lankan experience!</span>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Contact Info */}
+          <div className="mt-6 pt-6 border-t border-green-200">
+            <p className="text-sm text-gray-600 mb-3">Questions? Contact us:</p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <a href="tel:+94703206081" className="text-orange-500 hover:text-orange-600 font-medium">
+                📞 +94 703 206 081
+              </a>
+              <a href="mailto:j.tours.rent@gmail.com" className="text-orange-500 hover:text-orange-600 font-medium">
+                📧 j.tours.rent@gmail.com
+              </a>
+              <a href="https://wa.me/94703206081" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 font-medium">
+                💬 WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-10">
+    <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-10 relative">
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="absolute inset-0 bg-white bg-opacity-95 rounded-xl sm:rounded-2xl z-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Mail className="w-6 h-6 text-orange-500 animate-pulse" />
+              </div>
+            </div>
+            <p className="text-lg font-semibold text-gray-900 mb-2">Sending your booking...</p>
+            <p className="text-sm text-gray-600">Please wait while we process your request</p>
+          </div>
+        </div>
+      )}
+      
       <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
         Book Your Sri Lanka Tour
       </h3>
       <p className="text-sm sm:text-base text-gray-600 text-center mb-6 sm:mb-8">
         Fill in your details and we'll get back to you within 24 hours
       </p>
+
+      {/* Error Message Display */}
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg animate-fade-in">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <p className="text-sm text-red-700 font-medium">{error}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setError(null)}
+              className="ml-auto flex-shrink-0 text-red-500 hover:text-red-700"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
       
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
@@ -396,9 +518,24 @@ const TourBookingForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 sm:py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl uppercase tracking-wide text-sm sm:text-base"
+          disabled={loading}
+          className={`w-full ${
+            loading 
+              ? 'bg-gray-400 cursor-not-allowed' 
+              : 'bg-orange-500 hover:bg-orange-600 hover:scale-[1.02]'
+          } text-white font-semibold py-3 sm:py-4 px-6 rounded-lg transition-all duration-300 transform shadow-lg hover:shadow-xl uppercase tracking-wide text-sm sm:text-base flex items-center justify-center`}
         >
-          Submit Booking Request
+          {loading ? (
+            <>
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Submitting...
+            </>
+          ) : (
+            'Submit Booking Request'
+          )}
         </button>
 
         <p className="text-xs sm:text-sm text-gray-500 text-center mt-4">

@@ -16,6 +16,8 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   // Scroll-based show/hide header
   useEffect(() => {
@@ -98,6 +100,22 @@ useEffect(() => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Swipe to close mobile menu
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientY);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientY);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 150) {
+      // Swiped up - close menu
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <>
       {/* Desktop / Tablet - EXACTLY YOUR ORIGINAL DESIGN */}
@@ -111,11 +129,11 @@ useEffect(() => {
             <div ref={logoRef} className="flex items-center gap-3">
               <img 
                 src="/logo.png" 
-                alt="J Toors Logo" 
+                alt="J Tours Logo" 
                 className="h-20 w-auto"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-gray-900">J Toors</span>
+                <span className="text-xl font-bold text-gray-900">J Tours</span>
                 <span className="text-xs text-gray-600">Explore Sri Lanka</span>
               </div>
             </div>
@@ -151,10 +169,10 @@ useEffect(() => {
           <Link href="/" className="flex items-center gap-2">
             <img 
               src="/logo.png" 
-              alt="J Toors Logo" 
+              alt="J Tours Logo" 
               className="h-16 w-auto"
             />
-            <span className="text-lg font-bold text-gray-900">J Toors</span>
+            <span className="text-lg font-bold text-gray-900">J Tours</span>
           </Link>
           <button
             onClick={toggleMobileMenu}
@@ -172,31 +190,39 @@ useEffect(() => {
 
       {/* Mobile Fullscreen Menu */}
       <div
-        className={`md:hidden fixed inset-0 z-40 backdrop-blur-xl bg-white/95 transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 z-[60] backdrop-blur-xl bg-white/95 transition-all duration-500 ${
           mobileMenuOpen 
             ? "opacity-100 visible translate-y-0" 
             : "opacity-0 invisible -translate-y-full"
         }`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
+        {/* Swipe Indicator */}
+        {mobileMenuOpen && (
+          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1.5 bg-gray-400 rounded-full"></div>
+        )}
+        
         <div className="flex flex-col h-full pt-20">
           <nav className="flex-1 px-8 py-8">
             <div className="space-y-2">
               {navItems.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <Link key={item.name} href={item.path}>
-                    <button
-                      onClick={() => {
-                        handleNavClick(index);
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full flex items-center gap-4 px-4 py-4 rounded-2xl hover:bg-white/50 transition-all duration-300"
-                    >
-                      <Icon className="w-5 h-5 text-cyan-500" />
-                      <span className="text-lg font-medium text-black/80">
-                        {item.name}
-                      </span>
-                    </button>
+                  <Link 
+                    key={item.name} 
+                    href={item.path}
+                    onClick={() => {
+                      handleNavClick(index);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-4 px-4 py-4 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                  >
+                    <Icon className="w-5 h-5 text-cyan-500" />
+                    <span className="text-lg font-medium text-black/80">
+                      {item.name}
+                    </span>
                   </Link>
                 );
               })}
@@ -206,7 +232,7 @@ useEffect(() => {
           {/* Mobile Menu Footer */}
           <div className="px-8 pb-8 pt-4 border-t border-black/10">
             <p className="text-center text-sm text-black/60">
-              © 2024 J Toors Sri Lanka
+              © 2024 J Tours Sri Lanka
             </p>
           </div>
         </div>

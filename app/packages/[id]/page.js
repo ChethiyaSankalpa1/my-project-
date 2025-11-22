@@ -1,35 +1,9 @@
-"use client";
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'next/navigation';
+import React from 'react';
 import { Clock, MapPin, Hotel, Car, Users, Calendar, CheckCircle, Star, Phone, Mail, Share2, Download, Camera, Utensils, Plane, AlertCircle, Award, Shield, ThumbsUp, Globe, Headphones, CreditCard } from 'lucide-react';
 import TourBookingForm from '../../components/TourBookingForm';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const PackageDetailPage = () => {
-  const params = useParams();
+const PackageDetailPage = ({ params }) => {
   const packageId = params.id;
-  const [activeDay, setActiveDay] = useState(0);
-  const heroRef = useRef(null);
-  const timelineRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Parallax hero effect
-      gsap.to(heroRef.current, {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        },
-        y: 200,
-        opacity: 0.3
-      });
-    }
-  }, []);
 
   // All package data with detailed day-by-day itineraries
   const packagesData = {
@@ -793,6 +767,136 @@ const PackageDetailPage = () => {
         'Travel insurance'
       ]
     },
+    '17d16n': {
+      title: '17 Days / 16 Nights Premium Sri Lanka Journey',
+      duration: '17 Days / 16 Nights',
+      price: 'Contact for pricing',
+      mainImage: '/temple.jpg',
+      summary: 'An exceptional extended journey combining cultural heritage, stunning landscapes, wildlife encounters, and coastal relaxation with carefully curated experiences.',
+      days: [
+        {
+          day: 'Day 1-2',
+          title: 'Negombo Coastal Experience',
+          image: '/beach.jpg',
+          activities: [
+            { activity: 'Airport Pickup & Negombo', description: 'Welcome to Sri Lanka! Fish market, Dutch Canal exploration', image: '/beach.jpg' },
+            { activity: 'Beach Relaxation', description: 'Golden sands and coastal walks' }
+          ]
+        },
+        {
+          day: 'Day 3-4',
+          title: 'Ancient Kingdoms',
+          image: '/anuradhapura.jpg',
+          activities: [
+            { activity: 'Anuradhapura Ancient City', description: 'UNESCO World Heritage site - stupas, Sri Maha Bodhi tree', image: '/anuradhapura.jpg' },
+            { activity: 'Polonnaruwa Cycling Tour', description: 'Explore ancient ruins by bicycle', image: '/anciant.jpeg' }
+          ]
+        },
+        {
+          day: 'Day 5-6',
+          title: 'Sigiriya & Cultural Triangle',
+          image: '/sigiriya.jpeg',
+          activities: [
+            { activity: 'Sigiriya Rock Fortress', description: '5th-century fortress climb', image: '/sigiriya.jpeg' },
+            { activity: 'Pidurangala Rock Sunset', description: 'Alternative viewpoint for sunset', image: '/mountain.jpg' },
+            { activity: 'Dambulla Cave Temple', description: 'Golden cave temple complex', image: '/anciant.jpeg' },
+            { activity: 'Minneriya Elephant Safari', description: 'Elephant gathering experience', image: '/elephants.webp' }
+          ]
+        },
+        {
+          day: 'Day 7-8',
+          title: 'Kandy Cultural Heart',
+          image: '/templeofthetooth.jpg',
+          activities: [
+            { activity: 'Pinnawala Elephant Orphanage', description: 'Elephant bathing experience', image: '/elephants.webp' },
+            { activity: 'Temple of the Tooth', description: 'Sacred Buddhist temple', image: '/templeofthetooth.jpg' },
+            { activity: 'Cultural Dance Show', description: 'Traditional Kandyan performance', image: '/perahara.jpeg' },
+            { activity: 'Royal Botanical Gardens', description: 'Beautiful gardens and orchid collection', image: '/temple.jpg' }
+          ]
+        },
+        {
+          day: 'Day 9-10',
+          title: 'Tea Country Experience',
+          image: '/tea.jpg',
+          activities: [
+            { activity: 'Tea Plantation Tours', description: 'Multiple tea estates and factory visits', image: '/tea.jpg' },
+            { activity: 'Gregory Lake Activities', description: 'Scenic lake and boat rides' },
+            { activity: 'Ramboda Falls', description: 'Waterfall photo stop', image: '/dunhida.webp' },
+            { activity: 'Horton Plains Trek', description: 'World\'s End cliff viewpoint (optional)', image: '/mountain.jpg' }
+          ]
+        },
+        {
+          day: 'Day 11-12',
+          title: 'Ella Mountain Paradise',
+          image: '/ninearch.jpg',
+          activities: [
+            { activity: 'Scenic Train Journey', description: 'World-famous mountain train ride', image: '/ninearch.jpg' },
+            { activity: 'Nine Arch Bridge', description: 'Iconic colonial bridge photography' },
+            { activity: 'Little Adam\'s Peak', description: 'Easy panoramic hike', image: '/mountain.jpg' },
+            { activity: 'Ravana Falls & Cave', description: 'Waterfall exploration', image: '/dunhida.webp' }
+          ]
+        },
+        {
+          day: 'Day 13-14',
+          title: 'Wildlife Safari Experience',
+          image: '/elephants.webp',
+          activities: [
+            { activity: 'Yala National Park Safari', description: 'Full day safari for leopard spotting', image: '/elephants.webp' },
+            { activity: 'Udawalawe National Park', description: 'Elephant transit home safari' }
+          ]
+        },
+        {
+          day: 'Day 15',
+          title: 'South Coast Beaches',
+          image: '/beach.jpg',
+          activities: [
+            { activity: 'Mirissa Beach', description: 'Beach relaxation and optional whale watching' },
+            { activity: 'Unawatuna Beach', description: 'Golden sands and palm trees', image: '/beach.jpg' }
+          ]
+        },
+        {
+          day: 'Day 16',
+          title: 'Galle Heritage & Coast',
+          image: '/temple.jpg',
+          activities: [
+            { activity: 'Galle Fort Tour', description: 'UNESCO Dutch colonial fort exploration', image: '/temple.jpg' },
+            { activity: 'Turtle Hatchery', description: 'Conservation center visit' },
+            { activity: 'Madu River Safari', description: 'Mangrove boat tour' }
+          ]
+        },
+        {
+          day: 'Day 17',
+          title: 'Colombo & Departure',
+          image: '/portcity.jpg',
+          activities: [
+            { activity: 'Colombo City Tour', description: 'Gangaramaya Temple, Independence Square, Galle Face Green', image: '/portcity.jpg' },
+            { activity: 'Airport Transfer', description: 'Departure - Safe travels!' }
+          ]
+        }
+      ],
+      includes: [
+        '16 nights accommodation (3-4 star hotels & beach resorts)',
+        'Daily breakfast & select meals',
+        'Private air-conditioned vehicle throughout',
+        'Professional English-speaking driver/guide',
+        'Multiple wildlife safaris (Minneriya, Yala, Udawalawe)',
+        'Scenic train tickets',
+        'Boat safaris (Madu River)',
+        'All entrance fees to monuments & parks',
+        'Cultural shows',
+        'Village experiences',
+        'Cycling equipment',
+        'Parking & highway tolls'
+      ],
+      notIncludes: [
+        'International flights',
+        'Some lunches and dinners',
+        'Tips and gratuities',
+        'Personal expenses',
+        'Travel insurance',
+        'Camera/video permits'
+      ]
+    },
     '21d20n': {
       title: '21 Days / 20 Nights Ultimate Sri Lanka',
       duration: '21 Days / 20 Nights',
@@ -939,9 +1043,8 @@ const PackageDetailPage = () => {
   return (
     <main className="pt-20">
       {/* Hero Header - Enhanced */}
-      <section className="relative h-[60vh] sm:h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
+      <section className="relative min-h-[500px] h-[70vh] sm:h-[75vh] md:h-[80vh] lg:h-[85vh] overflow-hidden">
         <div 
-          ref={heroRef}
           className="absolute inset-0 bg-cover bg-center scale-110"
           style={{ backgroundImage: `url(${packageData.mainImage})` }}
         >
@@ -949,8 +1052,8 @@ const PackageDetailPage = () => {
         </div>
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
           {/* Breadcrumb */}
-          <div className="mb-6">
-            <div className="flex items-center gap-2 text-white/80 text-sm">
+          <div className="mb-3 sm:mb-4 md:mb-6">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-white/80 text-xs sm:text-sm flex-wrap justify-center">
               <span>Home</span>
               <span>/</span>
               <span>Packages</span>
@@ -1010,72 +1113,72 @@ const PackageDetailPage = () => {
       </section>
 
       {/* Quick Info Cards - Enhanced */}
-      <section className="py-16 bg-gradient-to-b from-white to-gray-50 -mt-20 relative z-10">
+      <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-white to-gray-50 -mt-16 sm:-mt-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {/* Duration */}
-            <div className="group bg-gradient-to-br from-white to-orange-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-orange-200">
+            <div className="group bg-gradient-to-br from-white to-orange-50 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-orange-200">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                  <Clock className="w-8 h-8 text-white" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Clock className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Duration</h3>
-                <p className="text-sm text-orange-600 font-semibold">{packageData.duration}</p>
+                <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-xs sm:text-sm md:text-base lg:text-lg">Duration</h3>
+                <p className="text-xs sm:text-sm text-orange-600 font-semibold">{packageData.duration}</p>
               </div>
             </div>
 
             {/* Transport */}
-            <div className="group bg-gradient-to-br from-white to-blue-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-blue-200">
+            <div className="group bg-gradient-to-br from-white to-blue-50 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-blue-200">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                  <Car className="w-8 h-8 text-white" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Car className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Transport</h3>
-                <p className="text-sm text-blue-600 font-semibold">Private A/C</p>
+                <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-xs sm:text-sm md:text-base lg:text-lg">Transport</h3>
+                <p className="text-xs sm:text-sm text-blue-600 font-semibold">Private A/C</p>
               </div>
             </div>
 
             {/* Meals */}
-            <div className="group bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-green-200">
+            <div className="group bg-gradient-to-br from-white to-green-50 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-green-200">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                  <Utensils className="w-8 h-8 text-white" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Utensils className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Meals</h3>
-                <p className="text-sm text-green-600 font-semibold">Breakfast Daily</p>
+                <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-xs sm:text-sm md:text-base lg:text-lg">Meals</h3>
+                <p className="text-xs sm:text-sm text-green-600 font-semibold">Breakfast Daily</p>
               </div>
             </div>
 
             {/* Accommodation */}
-            <div className="group bg-gradient-to-br from-white to-purple-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-purple-200">
+            <div className="group bg-gradient-to-br from-white to-purple-50 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-purple-200">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                  <Hotel className="w-8 h-8 text-white" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Hotel className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Hotels</h3>
-                <p className="text-sm text-purple-600 font-semibold">3-4 Star</p>
+                <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-xs sm:text-sm md:text-base lg:text-lg">Hotels</h3>
+                <p className="text-xs sm:text-sm text-purple-600 font-semibold">3-4 Star</p>
               </div>
             </div>
           </div>
 
           {/* Additional Quick Stats */}
-          <div className="mt-8 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="mt-4 sm:mt-6 md:mt-8 bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 border border-gray-200">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 text-center">
               <div>
-                <p className="text-3xl font-bold text-orange-600 mb-1">{packageData.days?.length || '5'}+</p>
-                <p className="text-sm text-gray-600 font-medium">Days of Adventure</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-600 mb-0.5 sm:mb-1">{packageData.days?.length || '5'}+</p>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium">Days of Adventure</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-blue-600 mb-1">15+</p>
-                <p className="text-sm text-gray-600 font-medium">Amazing Locations</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 mb-0.5 sm:mb-1">15+</p>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium">Amazing Locations</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-green-600 mb-1">100%</p>
-                <p className="text-sm text-gray-600 font-medium">Private Tours</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-green-600 mb-0.5 sm:mb-1">100%</p>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium">Private Tours</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-purple-600 mb-1">4.9★</p>
-                <p className="text-sm text-gray-600 font-medium">Customer Rating</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600 mb-0.5 sm:mb-1">4.9★</p>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium">Customer Rating</p>
               </div>
             </div>
           </div>
@@ -1083,18 +1186,18 @@ const PackageDetailPage = () => {
       </section>
 
       {/* Day by Day Itinerary - Enhanced Timeline */}
-      <section id="itinerary" className="py-16 bg-white">
+      <section id="itinerary" className="py-8 sm:py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-orange-100 px-4 py-2 rounded-full mb-4">
-              <Calendar className="w-5 h-5 text-orange-600" />
-              <span className="text-orange-600 font-semibold">Tour Itinerary</span>
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <div className="inline-flex items-center gap-2 bg-orange-100 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4">
+              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+              <span className="text-orange-600 font-semibold text-xs sm:text-sm md:text-base">Tour Itinerary</span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 px-4">
               Detailed Day-by-Day <span className="text-orange-500">Journey</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               Every moment carefully planned for an unforgettable experience
             </p>
           </div>
@@ -1102,39 +1205,41 @@ const PackageDetailPage = () => {
           {/* Itinerary Timeline */}
           <div className="relative">
             {packageData.days.map((day, dayIdx) => (
-              <div key={dayIdx} className="mb-12 last:mb-0">
+              <div key={dayIdx} className="mb-6 sm:mb-8 md:mb-12 last:mb-0">
                 {/* Timeline Dot & Line */}
-                <div className="flex gap-6 relative">
+                <div className="flex gap-1 sm:gap-2 md:gap-4 lg:gap-6 relative">
                   {/* Left Side - Day Number */}
-                  <div className="flex-shrink-0 w-16 sm:w-20 md:w-24 text-right">
+                  <div className="flex-shrink-0 w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 text-right">
                     <div className="sticky top-24">
                       <div className="inline-flex flex-col items-end">
-                        <span className="text-2xl sm:text-3xl font-bold text-orange-500">{String(dayIdx + 1).padStart(2, '0')}</span>
-                        <span className="text-xs sm:text-sm text-gray-500 font-medium">DAY</span>
+                        <span className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-500">
+                          {day.day.includes('-') ? day.day.replace('Day ', '') : String(dayIdx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm text-gray-500 font-medium">DAY</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Timeline Line */}
                   <div className="flex-shrink-0 relative">
-                    <div className="w-4 h-4 bg-orange-500 rounded-full ring-4 ring-orange-100 relative z-10"></div>
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-orange-500 rounded-full ring-2 sm:ring-4 ring-orange-100 relative z-10"></div>
                     {dayIdx < packageData.days.length - 1 && (
-                      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-orange-300 to-transparent"></div>
+                      <div className="absolute top-3 sm:top-4 left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-orange-300 to-transparent"></div>
                     )}
                   </div>
 
                   {/* Right Side - Content */}
-                  <div className="flex-1 pb-8">
-                    <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+                  <div className="flex-1 pb-4 sm:pb-6 md:pb-8">
+                    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
                       {/* Day Header */}
-                      <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-4 sm:p-6 text-white">
-                        <div className="flex items-center justify-between flex-wrap gap-3">
+                      <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-3 sm:p-4 md:p-6 text-white">
+                        <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-3">
                           <div>
-                            <p className="text-orange-100 text-xs sm:text-sm font-medium mb-1">{day.day}</p>
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">{day.title}</h3>
+                            <p className="text-orange-100 text-[10px] sm:text-xs md:text-sm font-medium mb-0.5 sm:mb-1">{day.day}</p>
+                            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold">{day.title}</h3>
                           </div>
                           {day.image && (
-                            <div className="w-16 h-16 rounded-lg overflow-hidden ring-4 ring-white/30">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg overflow-hidden ring-2 sm:ring-4 ring-white/30">
                               <img src={day.image} alt={day.title} className="w-full h-full object-cover" />
                             </div>
                           )}
@@ -1142,10 +1247,10 @@ const PackageDetailPage = () => {
                       </div>
 
                       {/* Activities */}
-                      <div className="p-4 sm:p-6 space-y-4 sm:space-y-5">
+                      <div className="p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4 md:space-y-5">
                         {day.activities.map((activity, actIdx) => (
                           <div key={actIdx} className="group">
-                            <div className="flex gap-4">
+                            <div className="flex gap-2 sm:gap-3 md:gap-4">
                               {/* Activity Icon */}
                               <div className="flex-shrink-0">
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg flex items-center justify-center text-white text-sm sm:text-base font-bold shadow-md group-hover:scale-110 transition-transform">
@@ -1278,7 +1383,7 @@ const PackageDetailPage = () => {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-orange-100 px-4 py-2 rounded-full mb-4">
               <Award className="w-5 h-5 text-orange-600" />
-              <span className="text-orange-600 font-semibold">Why Choose J Toors</span>
+              <span className="text-orange-600 font-semibold">Why Choose J Tours</span>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Experience The <span className="text-orange-500">Difference</span>
@@ -1466,7 +1571,7 @@ const PackageDetailPage = () => {
                 <h3 className="text-sm sm:text-base font-bold text-gray-900">WhatsApp</h3>
               </div>
               <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4">Quick response via WhatsApp</p>
-              <a href="https://wa.me/94771234567" className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-700">
+              <a href="https://wa.me/94703206081" className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-700">
                 Chat Now →
               </a>
             </div>
@@ -1577,5 +1682,19 @@ const PackageDetailPage = () => {
     </main>
   );
 };
+
+// Generate static params for all package IDs
+export async function generateStaticParams() {
+  return [
+    { id: 'ella-day' },
+    { id: 'haputale-day' },
+    { id: '5d4n' },
+    { id: '7d6n' },
+    { id: '10d9n' },
+    { id: '14d13n' },
+    { id: '17d16n' },
+    { id: '21d20n' }
+  ];
+}
 
 export default PackageDetailPage;

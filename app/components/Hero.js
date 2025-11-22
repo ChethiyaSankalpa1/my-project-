@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight, MapPin, Calendar, Users, Star } from 'lucide-react';
 import gsap from 'gsap';
 
@@ -156,12 +157,18 @@ const Hero = () => {
                       {slide.description}
                     </p>
                     <div className="flex flex-wrap gap-4 opacity-0" ref={el => setRef(index, 'buttons', el)}>
-                      <button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
+                      <Link 
+                        href="/packages"
+                        className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg inline-block"
+                      >
                         Explore Tours
-                      </button>
-                      <button className="border-2 border-white/80 text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-medium transition-all duration-300">
+                      </Link>
+                      <Link 
+                        href="/about"
+                        className="border-2 border-white/80 text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-medium transition-all duration-300 inline-block"
+                      >
                         Learn More
-                      </button>
+                      </Link>
                     </div>
                   </>
                 )}

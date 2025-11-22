@@ -1,0 +1,22 @@
+# Copy this content to create your .env.local file
+# 
+# Instructions:
+# 1. Create a new file named .env.local in the Dream-tour folder
+# 2. Copy the content below into that file
+# 3. Replace "your_app_password_here" with your actual Gmail App Password
+# 4. Save the file
+#
+# ==========================================
+
+GMAIL_USER=j.tours.rent@gmail.com
+GMAIL_APP_PASSWORD=your_app_password_here
+
+# ==========================================
+#
+# To get your Gmail App Password:
+# 1. Go to https://myaccount.google.com/apppasswords
+# 2. Enable 2-Factor Authentication if not already enabled
+# 3. Generate an App Password for "Mail"
+# 4. Copy the 16-character password and paste it above
+#
+# See EMAIL_SETUP_GUIDE.md for detailed instructions

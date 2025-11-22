@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { ChevronDown, ChevronUp, MapPin, Clock, Hotel, Car } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -337,13 +338,12 @@ const AllPackages = () => {
           </div>
 
           {/* View Details Button */}
-          <a href={`/packages/${pkg.id}`}>
-            <button
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all text-sm sm:text-base"
-            >
-              View Full Details <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-          </a>
+          <Link 
+            href={`/packages/${pkg.id}`}
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all text-sm sm:text-base"
+          >
+            View Full Details <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
+          </Link>
         </div>
       </div>
     );

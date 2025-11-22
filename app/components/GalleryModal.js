@@ -118,7 +118,7 @@ const GalleryModal = ({ isOpen, onClose }) => {
         <div className="flex items-center gap-3 max-w-7xl mx-auto">
           <Camera className="w-6 h-6 text-orange-500" />
           <h2 className="text-2xl font-bold text-white">
-            J Toors Gallery
+            J Tours Gallery
           </h2>
           <span className="text-sm text-white/60 ml-auto">
             {currentIndex + 1} / {images.length}

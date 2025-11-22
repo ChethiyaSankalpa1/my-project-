@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight, MapPin, Calendar, Users, Star } from 'lucide-react';
 
 const TourHero = () => {
@@ -89,9 +90,9 @@ const TourHero = () => {
         <div className="max-w-3xl">
           {/* Logo and Brand Name */}
           <div className="flex items-center gap-3 mb-6">
-            <img src="/logo.png" alt="J Toors" className="h-12 sm:h-16 w-auto" />
+            <img src="/logo.png" alt="J Tours" className="h-12 sm:h-16 w-auto filter drop-shadow-lg" style={{filter: 'brightness(0) invert(1)'}} />
             <div>
-              <h2 className="text-white text-2xl sm:text-3xl font-bold">J Toors</h2>
+              <h2 className="text-white text-2xl sm:text-3xl font-bold">J Tours</h2>
               <p className="text-white/80 text-xs sm:text-sm">Explore Sri Lanka</p>
             </div>
           </div>
@@ -114,12 +115,12 @@ const TourHero = () => {
             >
               Book Now
             </button>
-            <button 
-              onClick={scrollToBooking}
-              className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300"
+            <Link 
+              href="/packages"
+              className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 inline-block"
             >
               Explore Tours
-            </button>
+            </Link>
           </div>
 
           {/* Stats */}
