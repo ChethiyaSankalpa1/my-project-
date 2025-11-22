@@ -1213,7 +1213,7 @@ const PackageDetailPage = ({ params }) => {
                     <div className="sticky top-24">
                       <div className="inline-flex flex-col items-end">
                         <span className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-500">
-                          {day.day.includes('-') ? day.day.replace('Day ', '') : String(dayIdx + 1).padStart(2, '0')}
+                          {String(dayIdx + 1).padStart(2, '0')}
                         </span>
                         <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm text-gray-500 font-medium">DAY</span>
                       </div>
